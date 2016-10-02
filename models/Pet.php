@@ -7,28 +7,27 @@ use Model;
  */
 class Pet extends Model
 {
-
-    /**
-     * @var string The database table used by the model.
-     */
     public $table = 'goodnello_pets_pets';
 
-    /**
-     * @var array Guarded fields
-     */
-    protected $guarded = ['*'];
-
-    /**
-     * @var array Fillable fields
-     */
-    protected $fillable = [];
-
-    /**
-     * @var array Relations
-     */
+    public $timestamps = false;
 
     public $belongsTo = [
         'user' => ['RainLab\User\Models\User']
     ];
+
+    public static function getFromUser($user) {
+
+        if($user->pet)
+            return $user->pet;
+
+        $pet = new static;
+        $pet->user = $user;
+        $pet->save();
+
+        $user->pet = $pet;
+
+        return $pet;
+
+    }
 
 }
