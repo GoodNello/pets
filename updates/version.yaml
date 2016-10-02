@@ -1,1 +1,4 @@
 1.0.1: First version of Pets
+1.0.2:
+    - Added pet model
+    - create_pets_table.php
