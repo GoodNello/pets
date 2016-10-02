@@ -4,6 +4,7 @@ use Backend;
 use System\Classes\PluginBase;
 use RainLab\User\Models\User as UserModel;
 use RainLab\User\Controllers\Users as UsersController;
+use GoodNello\Pets\Models\Pet as PetModel;
 
 /**
  * Pets Plugin Information File
@@ -43,14 +44,49 @@ class Plugin extends PluginBase
      */
     public function boot() {
 
-        User::extend(function($model){
+        UserModel::extend(function($model){
             $model->hasOne['Pet'] = ['GoodNello\Pets\Model\Pet'];
         });
 
-        UserController::extendFormFields(function($form, $model, $context) {
+        UsersController::extendFormFields(function($form, $model, $context) {
+
+            if(!$model instanceof UserModel || !$model->exists)
+                return;
+
+            PetModel::getFromUser($model);
 
             $form->addTabFields([
-
+                'pet[name]' => [
+                    'label' => 'Name',
+                    'tab' => 'Pets',
+                    'type' => 'text',
+                ],
+                'pet[genus]' => [
+                    'label' => 'Genus',
+                    'tab' => 'Pets',
+                    'type' => 'dropdown',
+                    'options' => [
+                        'cat' => 'Cat',
+                        'dog' => 'Dog',
+                    ],
+                ],
+                'pet[species]' => [
+                    'label' => 'Species',
+                    'tab' => 'Pets',
+                    'type' => 'text',
+                ],
+                'pet[birth]' => [
+                    'label' => 'Birth',
+                    'tab' => 'Pets',
+                    'type' => 'datepicker',
+                    'mode' => 'date',
+                    'maxDate' => 'today',
+                ],
+                'pet[description]' => [
+                    'label' => 'Description',
+                    'tab' => 'Pets',
+                    'type' => 'textarea',
+                ],
             ]);
 
         });
