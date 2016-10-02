@@ -11,7 +11,12 @@ class CreatePetsTable extends Migration
         Schema::create('goodnello_pets_pets', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('user_id')->unsigned()->index();
+            $table->text('name')->nullable();
+            $table->char('genus', 10)->nullable();
+            $table->string('species')->nullable();
+            $table->date('birth')->nullable();
+            $table->text('description')->nullable();
         });
     }
 
