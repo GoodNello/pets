@@ -15,18 +15,39 @@ class Pet extends Model
         'user' => ['RainLab\User\Models\User']
     ];
 
+    protected $guarded = [
+        'user_id'
+    ];
+
+    protected $fillable = [
+        'name',
+        'genus',
+        'species',
+        'description'
+    ];
+
+    protected $dates = [
+        'birth',
+    ];
+
     public static function getFromUser($user) {
 
         if($user->pet)
             return $user->pet;
 
-        $pet = new static;
-        $pet->user = $user;
-        $pet->save();
+        if($user->pet) {
+            $user->pet = $pet;
+            $pet->setRelation('user', $user);
+        }
+        else {
+            $pet = new static;
+            $pet->user = $user;
+            $pet->save();
 
-        $user->pet = $pet;
+            $user->pet = $pet;
 
-        return $pet;
+            return $pet;
+        }
 
     }
 
