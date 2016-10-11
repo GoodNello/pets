@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Pet
+
+# Model Form Field configuration
+form: $/goodnello/pets/models/pet/fields.yaml
+
+# Model Class name
+modelClass: GoodNello\Pets\Models\Pet
+
+# Default redirect location
+defaultRedirect: goodnello/pets/pets
+
+# Create page
+create:
+    title: Create Pet
+    redirect: goodnello/pets/pets/update/:id
+    redirectClose: goodnello/pets/pets
+
+# Update page
+update:
+    title: Edit Pet
+    redirect: goodnello/pets/pets
+    redirectClose: goodnello/pets/pets
+
+# Preview page
+preview:
+    title: Preview Pet
