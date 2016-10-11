@@ -12,40 +12,20 @@ use GoodNello\Pets\Models\Pet as PetModel;
 class Plugin extends PluginBase
 {
 
-    /**
-     * Returns information about this plugin.
-     *
-     * @return array
-     */
     public function pluginDetails()
     {
         return [
             'name'        => 'Pets',
-            'description' => 'No description provided yet...',
+            'description' => 'Allows users to add their pets to their profiles',
             'author'      => 'GoodNello',
-            'icon'        => 'icon-leaf'
+            'icon'        => 'icon-paw'
         ];
     }
 
-    /**
-     * Register method, called when the plugin is first registered.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
-    }
-
-    /**
-     * Boot method, called right before the request route.
-     *
-     * @return array
-     */
     public function boot() {
 
         UserModel::extend(function($model){
-            $model->hasOne['Pet'] = ['GoodNello\Pets\Model\Pet'];
+            $model->hasOne['pet'] = ['GoodNello\Pets\Models\Pet'];
         });
 
         UsersController::extendFormFields(function($form, $model, $context) {
@@ -66,8 +46,8 @@ class Plugin extends PluginBase
                     'tab' => 'Pets',
                     'type' => 'dropdown',
                     'options' => [
-                        'cat' => 'Cat',
-                        'dog' => 'Dog',
+                        'Cat' => 'Cat',
+                        'Dog' => 'Dog',
                     ],
                 ],
                 'pet[species]' => [
@@ -93,11 +73,6 @@ class Plugin extends PluginBase
 
     }
 
-    /**
-     * Registers any front-end components implemented in this plugin.
-     *
-     * @return array
-     */
     public function registerComponents()
     {
         return []; // Remove this line to activate
@@ -107,11 +82,6 @@ class Plugin extends PluginBase
         ];
     }
 
-    /**
-     * Registers any back-end permissions used by this plugin.
-     *
-     * @return array
-     */
     public function registerPermissions()
     {
         return []; // Remove this line to activate
@@ -124,20 +94,13 @@ class Plugin extends PluginBase
         ];
     }
 
-    /**
-     * Registers back-end navigation items for this plugin.
-     *
-     * @return array
-     */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
-
         return [
             'pets' => [
                 'label'       => 'Pets',
-                'url'         => Backend::url('goodnello/pets/mycontroller'),
-                'icon'        => 'icon-leaf',
+                'url'         => Backend::url('goodnello/pets/pets'),
+                'icon'        => 'icon-paw',
                 'permissions' => ['goodnello.pets.*'],
                 'order'       => 500,
             ],
