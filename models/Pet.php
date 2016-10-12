@@ -44,6 +44,7 @@ class Pet extends Model
             $pet = new static;
             $pet->user = $user;
             $pet->save();
+<<<<<<< HEAD
 
             $user->pet = $pet;
 
@@ -55,6 +56,13 @@ class Pet extends Model
     public function getUserOptions($keyValue = null) {
 
         $users_name = Db::table('users')->lists('username');
+=======
+
+            $user->pet = $pet;
+
+            return $pet;
+        }
+>>>>>>> cdd1f6b61c588863284df7c1de60409f0bdfd7e8
 
         return $users_name;
     }
