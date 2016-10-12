@@ -1,6 +1,7 @@
 <?php namespace GoodNello\Pets\Models;
 
 use Model;
+use Db;
 
 /**
  * Pet Model
@@ -49,6 +50,13 @@ class Pet extends Model
             return $pet;
         }
 
+    }
+
+    public function getUserOptions($keyValue = null) {
+
+        $users_name = Db::table('users')->lists('username');
+
+        return $users_name;
     }
 
 }

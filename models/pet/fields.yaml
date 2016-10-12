@@ -6,3 +6,28 @@ fields:
     id:
         label: ID
         disabled: true
+        span: left
+
+    user:
+        label: Owner
+        type: dropdown
+        span: right
+
+    name:
+        label: Name
+
+    genus:
+        label: Genus
+        span: left
+
+    species:
+        label: Species
+        type: dropdown
+        span: right
+        options:
+            Cat: Cat
+            Dog: Dog
+
+    description:
+        label: Description
+        type: textarea
