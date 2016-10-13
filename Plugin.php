@@ -25,50 +25,7 @@ class Plugin extends PluginBase
     public function boot() {
 
         UserModel::extend(function($model){
-            $model->hasOne['pet'] = ['GoodNello\Pets\Models\Pet'];
-        });
-
-        UsersController::extendFormFields(function($form, $model, $context) {
-
-            if(!$model instanceof UserModel || !$model->exists)
-                return;
-
-            PetModel::getFromUser($model);
-
-            $form->addTabFields([
-                'pet[name]' => [
-                    'label' => 'Name',
-                    'tab' => 'Pets',
-                    'type' => 'text',
-                ],
-                'pet[genus]' => [
-                    'label' => 'Genus',
-                    'tab' => 'Pets',
-                    'type' => 'dropdown',
-                    'options' => [
-                        'Cat' => 'Cat',
-                        'Dog' => 'Dog',
-                    ],
-                ],
-                'pet[species]' => [
-                    'label' => 'Species',
-                    'tab' => 'Pets',
-                    'type' => 'text',
-                ],
-                'pet[birth]' => [
-                    'label' => 'Birth',
-                    'tab' => 'Pets',
-                    'type' => 'datepicker',
-                    'mode' => 'date',
-                    'maxDate' => 'today',
-                ],
-                'pet[description]' => [
-                    'label' => 'Description',
-                    'tab' => 'Pets',
-                    'type' => 'textarea',
-                ],
-            ]);
-
+            $model->belongsToMany['pet'] = ['GoodNello\Pets\Models\Pet', 'table' => 'goodnello_pets_owners'];
         });
 
     }
