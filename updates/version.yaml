@@ -2,3 +2,6 @@
 1.0.2:
     - Added pet model
     - create_pets_table.php
+1.1-alpha.1:
+    - Early support for multiple pets
+    - create_owners_table.php
