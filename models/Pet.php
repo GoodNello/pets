@@ -2,18 +2,26 @@
 
 use Model;
 use Db;
+use October\Rain\Database\Traits\Validation as Validation;
 
 /**
  * Pet Model
  */
 class Pet extends Model
 {
+
+    use Validation;
+
     public $table = 'goodnello_pets_pets';
 
     public $timestamps = false;
 
-    public $belongsToMany = [
-        'owners' => ['RainLab\User\Models\User', 'table' => 'goodnello_pets_owners']
+    public $belongsTo = [
+        'owner' => ['RainLab\User\Models\User']
+    ];
+
+    public $rules = [
+        'name' => 'required|between:2,255',
     ];
 
     protected $fillable = [
@@ -29,6 +37,7 @@ class Pet extends Model
 
     public static function getFromUser($user) {
 
+        //NEEDS ATTENTION
         if($user->pet)
             return $user->pet;
 
@@ -39,7 +48,7 @@ class Pet extends Model
 
     }
 
-    public function getUserOptions($keyValue = null) {
+    public function getOwnerIdOptions($keyValue = null) {
 
         $users_name = Db::table('users')->lists('username');
 
