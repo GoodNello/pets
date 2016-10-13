@@ -7,14 +7,25 @@ fields:
         label: ID
         disabled: true
         span: left
-
+    owner:
+        label: Owner
+        type: relation
+        span: right
+        select: email
+        default: "DOESNT WORK"
     name:
         label: Name
-
+        span: left
+        required: true
+    birth:
+        label: Birthday
+        type: datepicker
+        mode: date
+        maxdate: today
+        span: right
     genus:
         label: Genus
         span: left
-
     species:
         label: Species
         type: dropdown
@@ -22,7 +33,6 @@ fields:
         options:
             Cat: Cat
             Dog: Dog
-
     description:
         label: Description
         type: textarea
