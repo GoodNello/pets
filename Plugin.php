@@ -25,7 +25,7 @@ class Plugin extends PluginBase
     public function boot() {
 
         UserModel::extend(function($model){
-            $model->belongsToMany['pet'] = ['GoodNello\Pets\Models\Pet', 'table' => 'goodnello_pets_owners'];
+            $model->hasMany['pet'] = ['GoodNello\Pets\Models\Pet'];
         });
 
     }
