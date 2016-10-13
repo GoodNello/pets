@@ -8,11 +8,6 @@ fields:
         disabled: true
         span: left
 
-    user:
-        label: Owner
-        type: dropdown
-        span: right
-
     name:
         label: Name
 

@@ -7,11 +7,6 @@ columns:
         label: ID
         invisible: true
         hidden: true
-    user_id:
-        label: Owner
-        searchable: true
-        relation: user
-        select: name
     name:
         label: Name
         searchable: true
