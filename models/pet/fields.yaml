@@ -12,7 +12,6 @@ fields:
         type: relation
         span: right
         select: email
-        default: "DOESNT WORK"
     name:
         label: Name
         span: left
@@ -30,9 +29,6 @@ fields:
         label: Species
         type: dropdown
         span: right
-        options:
-            Cat: Cat
-            Dog: Dog
     description:
         label: Description
         type: textarea

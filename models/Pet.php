@@ -55,4 +55,11 @@ class Pet extends Model
         return $users_name;
     }
 
+    public function getSpeciesOptions($keyValue = null) {
+        return [
+            'Cat' => 'Cat',
+            'Dog' => 'Dog',
+        ];
+    }
+
 }
