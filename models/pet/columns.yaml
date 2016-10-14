@@ -7,11 +7,11 @@ columns:
         label: ID
         invisible: true
         hidden: true
-    user_id:
+    owner_id:
         label: Owner
         searchable: true
-        relation: user
-        select: name
+        relation: owner
+        select: email
     name:
         label: Name
         searchable: true
