@@ -12,6 +12,8 @@ class Pet extends Model
 
     use Validation;
 
+    protected $primaryKey = 'id';
+
     public $table = 'goodnello_pets_pets';
 
     public $timestamps = false;
@@ -55,11 +57,23 @@ class Pet extends Model
         return $users_name;
     }
 
+    protected function listSpecies() {
+        return json_decode(file_get_contents(__DIR__.'/../data/species.json'), true);
+    }
+
     public function getSpeciesOptions($keyValue = null) {
-        return [
-            'Cat' => 'Cat',
-            'Dog' => 'Dog',
-        ];
+
+        $species = array_map('ucfirst', $this->listSpecies());
+
+        return $species;
+    }
+
+    protected function getSpeciesAttribute($value) {
+
+        $species = array_map('ucfirst', $this->listSpecies());
+        $value = $species[$value];
+
+        return $value;
     }
 
 }
