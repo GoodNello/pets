@@ -28,7 +28,7 @@ class Pet extends Model
 
     protected $fillable = [
         'name',
-        'genus',
+        'breed',
         'species',
         'description'
     ];
@@ -71,7 +71,7 @@ class Pet extends Model
     protected function getSpeciesAttribute($value) {
 
         $species = array_map('ucfirst', $this->listSpecies());
-        $value = $species[$value];
+        $value = $species[($value ?: 0)];
 
         return $value;
     }

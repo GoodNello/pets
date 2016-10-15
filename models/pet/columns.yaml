@@ -15,8 +15,8 @@ columns:
     name:
         label: Name
         searchable: true
-    genus:
-        label: Genus
+    breed:
+        label: Breed
         searchable: true
     species:
         label: Species

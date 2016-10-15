@@ -22,8 +22,8 @@ fields:
         mode: date
         maxdate: today
         span: right
-    genus:
-        label: Genus
+    breed:
+        label: Breed
         span: left
     species:
         label: Species

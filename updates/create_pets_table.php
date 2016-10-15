@@ -14,7 +14,7 @@ class CreatePetsTable extends Migration
                 $table->increments('id');
                 $table->integer('owner_id')->unsigned()->index();
                 $table->text('name')->nullable();
-                $table->char('genus', 10)->nullable();
+                $table->char('breed', 10)->nullable();
                 $table->string('species')->nullable();
                 $table->date('birth')->nullable();
                 $table->text('description')->nullable();
