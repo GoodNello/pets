@@ -4,7 +4,6 @@ use Backend;
 use System\Classes\PluginBase;
 use RainLab\User\Models\User as UserModel;
 use RainLab\User\Controllers\Users as UsersController;
-use GoodNello\Pets\Models\Pet as PetModel;
 
 /**
  * Pets Plugin Information File
@@ -32,10 +31,8 @@ class Plugin extends PluginBase
 
     public function registerComponents()
     {
-        return []; // Remove this line to activate
-
         return [
-            'GoodNello\Pets\Components\MyComponent' => 'myComponent',
+            'GoodNello\Pets\Components\PetProfile' => 'petProfile',
         ];
     }
 
