@@ -33,6 +33,8 @@ class Plugin extends PluginBase
     {
         return [
             'GoodNello\Pets\Components\PetProfile' => 'petProfile',
+            'GoodNello\Pets\Components\PetManager' => 'petManager',
+            'GoodNello\Pets\Components\PetEditor' => 'petEditor',
         ];
     }
 
