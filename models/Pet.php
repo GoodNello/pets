@@ -3,6 +3,7 @@
 use Model;
 use Db;
 use October\Rain\Database\Traits\Validation as Validation;
+use GoodNello\Pets\Models\Pet as PetModel;
 
 /**
  * Pet Model
@@ -28,6 +29,7 @@ class Pet extends Model
 
     protected $fillable = [
         'name',
+        'owner_id',
         'breed',
         'species',
         'description'
@@ -39,14 +41,7 @@ class Pet extends Model
 
     public static function getFromUser($user) {
 
-        //NEEDS ATTENTION
-        if($user->pet)
-            return $user->pet;
-
-        if($user->pet) {
-            $user->pet = $pet;
-            $pet->setRelation('user', $user);
-        }
+        return PetModel::where('owner_id', $user->id)->get();
 
     }
 
@@ -61,13 +56,14 @@ class Pet extends Model
         return json_decode(file_get_contents(__DIR__.'/../data/species.json'), true);
     }
 
+    // Lists species for creation/editing
     public function getSpeciesOptions($keyValue = null) {
-
+        //I don't know why, but this keeps resetting when editing the model
         $species = array_map('ucfirst', $this->listSpecies());
-
         return $species;
     }
 
+    // Shows the species name when displaying the model
     protected function getSpeciesAttribute($value) {
 
         $species = array_map('ucfirst', $this->listSpecies());
