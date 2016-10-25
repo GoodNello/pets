@@ -1,5 +1,9 @@
 <?php namespace GoodNello\Pets\Components;
 
+use Flash;
+use Input;
+use Request;
+use Redirect;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use GoodNello\Pets\Models\Pet as PetModel;
@@ -23,12 +27,19 @@ class PetProfile extends ComponentBase
                 'description' => 'The unique identifier of a pet',
                 'default' => '{{ :id }}',
                 'type' => 'string'
+            ],
+            'mode' => [
+                'title' => 'Mode',
+                'description' => 'How the page should be loaded',
+                'type' => 'string',
+                'default' => '{{ :mode }}'
             ]
         ];
     }
 
     public function onRun() {
         $this->page['pet'] = $pet = $this->loadPet();
+        $this->page['mode'] = $mode = $this->property('mode');
 
         if($this->page['pet'] == NULL) {
             $this->setStatusCode(404);
@@ -41,6 +52,20 @@ class PetProfile extends ComponentBase
         $pet = PetModel::find($id);
 
         return $pet;
+    }
+
+    public function onUpdate() {
+
+        if(!$pet = $this->loadPet())
+            return;
+
+        $pet->fill(post());
+        $pet->save();
+
+        //This two lines do not work
+        Flash::success(post('flash', 'Pet saved!'));
+        Redirect::to('./pet/' . $this->property('id'));
+
     }
 
 }

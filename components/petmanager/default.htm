@@ -1,0 +1,14 @@
+
+{% if user %}
+    <h1>This is the PetManager component (LOGGED)</h1>
+    <a href='#' class="btn btn-primary oc-icon-plus">+ New Pet</a><br><br>
+    {% if pets %}
+        {% for pet in pets %}
+            {{ pet.name }} <a href='./pet/{{ pet.id }}/edit'>Edit</a><br>
+        {% endfor %}
+    {% else %}
+        This user has no pets!
+    {% endif %}
+{% else %}
+    <h1>This is the PetManager component (NOT LOGGED)</h1>
+{% endif %}

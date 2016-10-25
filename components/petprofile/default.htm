@@ -1,1 +1,9 @@
 <!-- Refer to the model properties with 'pet.smth' where 'smth' can be name, birth, description, owner, breed and species. -->
+<br><br>
+{% if mode == 'edit' %} <!-- If user is owner !!! -->
+
+    <h1>Edit this pet</h1>
+
+    {% partial __SELF__ ~ '::edit' %}
+
+{% endif %}

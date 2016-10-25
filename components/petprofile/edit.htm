@@ -1,0 +1,15 @@
+{{ form_ajax('onUpdate', { model: pet }) }}
+
+    <div class="form-group">
+        <label for="petName">Name</label>
+        <input name="name" type="text" class="form-control" id="petName" value="{{ form_value('name') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="petBreed">Breed</label>
+        <input name="breed" type="text" class="form-control" id="petBreed" value="{{ form_value('breed') }}">
+    </div>
+
+    <button type="submit" class="btn btn-default">Save</button>
+
+{{ form_close() }}
