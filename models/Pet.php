@@ -60,6 +60,22 @@ class Pet extends Model
     public function getSpeciesOptions($keyValue = null) {
         //I don't know why, but this keeps resetting when editing the model
         $species = array_map('ucfirst', $this->listSpecies());
+
+        if($this->species) {
+            $key = array_search($this->species, $species);
+            array_unshift($species, $this->species);
+
+            /*
+
+            $colours = array("red", "green", "blue", "yellow");
+
+            $movecolour = $colours[2];
+            unset($colours[2]);
+            array_unshift($colours, $movecolour);
+            */
+
+        }
+
         return $species;
     }
 
