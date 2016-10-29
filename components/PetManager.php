@@ -11,7 +11,7 @@ class PetManager extends ComponentBase
     {
         return [
             'name'        => 'PetManager Component',
-            'description' => 'Allows the signed-in users to manage their pets'
+            'description' => 'Allows signed-in users to manage their pets'
         ];
     }
 

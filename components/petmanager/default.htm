@@ -1,14 +1,29 @@
-
 {% if user %}
-    <h1>This is the PetManager component (LOGGED)</h1>
+    <h2>Manage your pets</h2>
     <a href='#' class="btn btn-primary oc-icon-plus">+ New Pet</a><br><br>
     {% if pets %}
-        {% for pet in pets %}
-            {{ pet.name }} <a href='./pet/{{ pet.id }}/edit'>Edit</a><br>
-        {% endfor %}
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Species</th>
+                <th>Breed</th>
+                <th>Brithday</th>
+                <th></th>
+            </tr>
+                {% for pet in pets %}
+                <tr>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.species }}</td>
+                <td>{{ pet.breed }}</td>
+                <td>{{ pet.birth }}</td>
+                <td><a class="btn btn-default btn-xs" href='./pet/{{ pet.id }}/edit' role="button">Edit</a><br></td>
+                </tr>
+                {% endfor %}
+
+        </table>
     {% else %}
-        This user has no pets!
+        You don't have any pets.
     {% endif %}
 {% else %}
-    <h1>This is the PetManager component (NOT LOGGED)</h1>
+    <h2>To manage your pets, first login.</h2>
 {% endif %}
