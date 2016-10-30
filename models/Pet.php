@@ -36,10 +36,6 @@ class Pet extends Model
         'description'
     ];
 
-    protected $dates = [
-        'birth',
-    ];
-
     public static function getFromUser($user) {
 
         return PetModel::where('owner_id', $user->id)->get();
@@ -59,7 +55,7 @@ class Pet extends Model
 
     // Lists species for creation/editing
     public function getSpeciesOptions($keyValue = null) {
-        //I don't know why, but this keeps resetting when editing the model
+        //This keeps resetting when editing the model
         $species = array_map('ucfirst', $this->listSpecies());
 
         return $species;
@@ -67,18 +63,17 @@ class Pet extends Model
 
     // Shows the species name when displaying the model
     protected function getSpeciesAttribute($value) {
-
+        
         $species = array_map('ucfirst', $this->listSpecies());
         $value = $species[($value ?: 0)];
 
         return $value;
     }
 
-    protected function getBirthAttribute($value) {
+    public function getBirthAttribute($date) {
 
-        $formatted = Carbon::createFromFormat('Y-m-d', $value)->formatLocalized('%d/%m/%Y'); ;
+        return Carbon::parse($date)->format('d/m/Y');
 
-        return $formatted;
     }
 
 }
