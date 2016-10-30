@@ -1,0 +1,10 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    backend_menu:
+        label: Display Backend Menu
+        type: switch
+        comment: Flick to display the menu in the backend
+        default: 1

@@ -3,7 +3,7 @@
 use Backend;
 use System\Classes\PluginBase;
 use RainLab\User\Models\User as UserModel;
-use RainLab\User\Controllers\Users as UsersController;
+use GoodNello\Pets\Models\Settings as Settings;
 
 /**
  * Pets Plugin Information File
@@ -40,26 +40,43 @@ class Plugin extends PluginBase
 
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'goodnello.pets.some_permission' => [
+            'goodnello.pets.access_settings' => [
                 'tab' => 'Pets',
-                'label' => 'Some permission'
+                'label' => 'Manage backend settings'
             ],
         ];
     }
 
     public function registerNavigation()
     {
+        if (Settings::instance()->backend_menu)
+            return [
+                'pets' => [
+                    'label'       => 'Pets',
+                    'url'         => Backend::url('goodnello/pets/pets'),
+                    'icon'        => 'icon-paw',
+                    'permissions' => ['goodnello.pets.*'],
+                    'order'       => 500,
+                ],
+            ];
+        else
+            return [];
+    }
+
+    public function registerSettings()
+    {
         return [
-            'pets' => [
-                'label'       => 'Pets',
-                'url'         => Backend::url('goodnello/pets/pets'),
+            'settings' => [
+                'label'       => 'Pets Settings',
+                'description' => 'Manage settings for the Pets plugin.',
+                'category'    => 'Pets',
                 'icon'        => 'icon-paw',
-                'permissions' => ['goodnello.pets.*'],
+                'class'       => 'GoodNello\Pets\Models\Settings',
                 'order'       => 500,
-            ],
+                'keywords'    => 'pets pet',
+                'permissions' => ['goodnello.pets.access_settings']
+            ]
         ];
     }
 
