@@ -55,19 +55,15 @@ class Pet extends Model
 
     // Lists species for creation/editing
     public function getSpeciesOptions($keyValue = null) {
-        //This keeps resetting when editing the model
-        $species = array_map('ucfirst', $this->listSpecies());
 
-        return $species;
+        return $this->listSpecies();
     }
-
+    
     // Shows the species name when displaying the model
-    protected function getSpeciesAttribute($value) {
-        
-        $species = array_map('ucfirst', $this->listSpecies());
-        $value = $species[($value ?: 0)];
+    protected function getSpeciesNameAttribute() {
 
-        return $value;
+        $species = $this->listSpecies();
+        return $species[$this->species];
     }
 
     public function getBirthAttribute($date) {
