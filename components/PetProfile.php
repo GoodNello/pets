@@ -62,9 +62,7 @@ class PetProfile extends ComponentBase
         $pet->fill(post());
         $pet->save();
 
-        //This two lines do not work
-        Flash::success(post('flash', 'Pet saved!'));
-        Redirect::to('./pet/' . $this->property('id'));
+        Flash::success(post('flash', 'Pet saved successfully'));
 
     }
 
