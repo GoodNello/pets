@@ -13,13 +13,12 @@
                 {% for pet in pets %}
                 <tr>
                 <td>{{ pet.name }}</td>
-                <td>{{ pet.species }}</td>
+                <td>{{ pet.speciesname }}</td>
                 <td>{{ pet.breed }}</td>
                 <td>{{ pet.birth }}</td>
                 <td><a class="btn btn-default btn-xs" href='./pet/{{ pet.id }}/edit' role="button">Edit</a><br></td>
                 </tr>
                 {% endfor %}
-
         </table>
     {% else %}
         <div class="alert alert-info">
@@ -27,5 +26,7 @@
         </div>
     {% endif %}
 {% else %}
-    <h2>To manage your pets, first login.</h2>
+    <div class="alert alert-warning">
+        To manage your pets, first login.
+    </div>
 {% endif %}
