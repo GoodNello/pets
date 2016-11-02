@@ -18,5 +18,6 @@ columns:
     breed:
         label: Breed
         searchable: true
-    species:
+    speciesname:
         label: Species
+        sortable: false
