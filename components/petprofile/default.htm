@@ -1,8 +1,57 @@
 <br><br>
-{% if mode == 'edit' %} <!-- If user is owner !!! -->
 
-    <h1>Edit this pet</h1>
+{% flash %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endflash %}
 
-    {% partial __SELF__ ~ '::edit' %}
+<div class="row">
+    <div class="col-md-6">{{ pet.name }}</div>
+    <div class="col-md-6">{{ pet.birth }}</div>
+</div><br><br>
+<div class="row">
+    <div class="col-md-6">{{ pet.breed }}</div>
+    <div class="col-md-6">{{ pet.speciesname }}</div>
+</div><br><br>
+<p>{{ pet.description }}</p>
 
+{% if owner %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-6">
+            <button type="button" class="btn btn-primary btn-sm">Edit</button>
+            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+    </div>
 {% endif %}
+
+
+<!--
+
+{{ form_open({ request: 'onUpdate', model: pet }) }}
+    {% flash %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endflash %}
+    <div class="form-group">
+        <label for="petName">Name</label>
+        <input name="name" type="text" class="form-control" id="petName" value="{{ form_value('name') }}">
+        <br>
+        <label for="petBreed">Breed</label>
+        <input name="breed" type="text" class="form-control" id="petBreed" value="{{ form_value('breed') }}">
+        <br>
+        <label for="petSpecies">Species</label>
+        <select class="form-control" id="petSpecies" disabled>
+            <option>{{ pet.speciesname }}</option>
+        </select>
+        <br>
+        <label for="petDescription">Description</label>
+        <textarea class="form-control" id="petDescription" rows="3">{{ pet.description }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Save</button><a class="btn btn-link btn-lg" href="#">Cancel</a>
+
+{{ form_close() }}
+
+-->

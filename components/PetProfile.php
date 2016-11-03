@@ -1,5 +1,6 @@
 <?php namespace GoodNello\Pets\Components;
 
+use Auth;
 use Flash;
 use Input;
 use Request;
@@ -39,7 +40,7 @@ class PetProfile extends ComponentBase
 
     public function onRun() {
         $this->page['pet'] = $pet = $this->loadPet();
-        $this->page['mode'] = $mode = $this->property('mode');
+        $this->page['owner'] = $this->isOwner();
 
         if($this->page['pet'] == NULL) {
             $this->setStatusCode(404);
@@ -63,6 +64,28 @@ class PetProfile extends ComponentBase
         $pet->save();
 
         Flash::success(post('flash', 'Pet saved successfully'));
+
+    }
+
+    public function isOwner() {
+
+        $user = $this->getUser();
+
+        if($user) {
+            $petID = $this->property('id');
+            if(PetModel::where('owner_id', $user->id)->where('id', $petID)->first())
+                return $user;
+        }
+
+        return;
+    }
+
+    public function getUser() {
+
+        if (!Auth::check())
+            return null;
+
+        return Auth::getUser();
 
     }
 
