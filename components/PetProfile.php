@@ -42,6 +42,7 @@ class PetProfile extends ComponentBase
         $this->page['pet'] = $pet = $this->loadPet();
         $this->page['owner'] = $this->isOwner();
 
+        //If no pet is found, a 404 error page is shown
         if($this->page['pet'] == NULL) {
             $this->setStatusCode(404);
             return $this->controller->run('404');
@@ -55,16 +56,23 @@ class PetProfile extends ComponentBase
         return $pet;
     }
 
+    public function onEdit() {
+        $this->page['pet'] = $pet = PetModel::find(post('id'));
+
+        if(!$pet || !$this->isOwner())
+            return;
+    }
+
     public function onUpdate() {
 
-        if(!$pet = $this->loadPet())
+        $pet = PetModel::find(post('id'));
+
+        if(!$pet || !$this->isOwner())
             return;
 
         $pet->fill(post());
         $pet->save();
-
         Flash::success(post('flash', 'Pet saved successfully'));
-
     }
 
     public function isOwner() {
