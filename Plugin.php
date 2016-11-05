@@ -26,7 +26,6 @@ class Plugin extends PluginBase
         UserModel::extend(function($model){
             $model->hasMany['pet'] = ['GoodNello\Pets\Models\Pet'];
         });
-
     }
 
     public function registerComponents()
@@ -49,7 +48,7 @@ class Plugin extends PluginBase
 
     public function registerNavigation()
     {
-        if (Settings::instance()->backend_menu)
+        if (Settings::get('backend_menu'))
             return [
                 'pets' => [
                     'label'       => 'Pets',
