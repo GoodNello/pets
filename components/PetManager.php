@@ -3,6 +3,7 @@
 use Auth;
 use Cms\Classes\ComponentBase;
 use GoodNello\Pets\Models\Pet as PetModel;
+use GoodNello\Pets\Models\Settings as Settings;
 
 class PetManager extends ComponentBase
 {
@@ -29,6 +30,7 @@ class PetManager extends ComponentBase
 
     public function onRun() {
         $this->page['user'] = $user = $this->getUser();
+        $this->page['alert'] = Settings::get('login_alert');
         if($user) //Checks if the user has any pets associated
             $this->page['pets'] = $pets = (PetModel::where('owner_id', $user->id)->first() ? PetModel::where('owner_id', $user->id)->get() : 0);
     }
