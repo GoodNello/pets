@@ -49,6 +49,11 @@ class PetProfile extends ComponentBase
         }
     }
 
+    public function onEnd() {
+
+        $this->page['message'] = 0;
+    }
+
     public function loadPet() {
         $id = $this->property('id');
         $pet = PetModel::find($id);
@@ -56,23 +61,27 @@ class PetProfile extends ComponentBase
         return $pet;
     }
 
-    public function onEdit() {
+    public function onUpdate() {
+
         $this->page['pet'] = $pet = PetModel::find(post('id'));
 
         if(!$pet || !$this->isOwner())
             return;
-    }
 
-    public function onUpdate() {
+        $mode = post('mode', 'edit');
 
-        $pet = PetModel::find(post('id'));
+        if($mode == 'save') {
+            $pet->fill(post());
+            $pet->save();
+            $this->page['message'] = 'Pet saved successfully!';
+        }
+        elseif($mode == 'delete') {
+            $pet->delete();
+            $this->page['message'] = 'Pet deleted successfully!';
+        }
 
-        if(!$pet || !$this->isOwner())
-            return;
-
-        $pet->fill(post());
-        $pet->save();
-        Flash::success(post('flash', 'Pet saved successfully'));
+        $this->page['mode'] = $mode;
+        $this->page['owner'] = $this->isOwner();
     }
 
     public function isOwner() {

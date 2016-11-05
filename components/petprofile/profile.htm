@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-6">{{ pet.name }}</div>
+    <div class="col-md-6">{{ pet.birth }}</div>
+</div><br><br>
+<div class="row">
+    <div class="col-md-6">{{ pet.breed }}</div>
+    <div class="col-md-6">{{ pet.speciesname }}</div>
+</div><br><br>
+<p>{{ pet.description }}</p>
+
+{% if owner %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-6">
+            <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                data-request="onUpdate"
+                data-request-data="id: {{ pet.id }}"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-page'">Edit</button>
+        </div>
+    </div>
+{% endif %}
