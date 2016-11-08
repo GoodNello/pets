@@ -30,6 +30,14 @@
                 data-request-confirm="Are you sure?">
                 Delete
             </button>
+            <button
+                type="button"
+                class="btn btn-link btn-sm"
+                data-request="{{ __SELF__ }}::onUndo"
+                data-request-data="id: {{ pet.id }}"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-page'">
+                Undo
+            </button>
         </div>
     </div>
 {{ form_close() }}

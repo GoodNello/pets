@@ -84,6 +84,11 @@ class PetProfile extends ComponentBase
         $this->page['owner'] = $this->isOwner();
     }
 
+    public function onUndo() {
+        $this->page['pet'] = $pet = PetModel::find(post('id'));
+        $this->page['owner'] = $this->isOwner();
+    }
+
     public function isOwner() {
 
         $user = $this->getUser();
