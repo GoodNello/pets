@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Species</th>
+        <th>Breed</th>
+        <th>Brithday</th>
+        <th></th>
+    </tr>
+        {% for pet in pets %}
+        <tr>
+        <td>{{ pet.name }}</td>
+        <td>{{ pet.speciesname }}</td>
+        <td>{{ pet.breed }}</td>
+        <td>{{ pet.birth }}</td>
+        <td><a class="btn btn-default btn-xs" href='./pet/{{ pet.id }}' role="button">View</a><br></td>
+        </tr>
+        {% endfor %}
+</table>

@@ -1,34 +1,24 @@
 {% if user %}
-    <h2>Manage your pets</h2>
-    <a href='#' class="btn btn-primary oc-icon-plus">+ New Pet</a><br><br>
-    {% if pets %}
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Species</th>
-                <th>Breed</th>
-                <th>Brithday</th>
-                <th></th>
-            </tr>
-                {% for pet in pets %}
-                <tr>
-                <td>{{ pet.name }}</td>
-                <td>{{ pet.speciesname }}</td>
-                <td>{{ pet.breed }}</td>
-                <td>{{ pet.birth }}</td>
-                <td><a class="btn btn-default btn-xs" href='./pet/{{ pet.id }}' role="button">View</a><br></td>
-                </tr>
-                {% endfor %}
-        </table>
+    <div id="pet-manager">
+        <h2>Manage your pets</h2>
+        <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            data-request="onCreate"
+            data-request-data="id: {{ pet.id }}"
+            data-request-update="'{{ __SELF__ }}::default': '#pet-manager'">+ New Pet</button>
+        {% if pets %}
+            {% partial "@petlist" pet=pet %}
+        {% else %}
+            <div class="alert alert-info">
+                You don't have any pets.
+            </div>
+        {% endif %}
     {% else %}
-        <div class="alert alert-info">
-            You don't have any pets.
-        </div>
-    {% endif %}
-{% else %}
-    {% if alert %}
-        <div class="alert alert-warning">
-            To manage your pets, first login.
-        </div>
-    {% endif %}
+        {% if alert %}
+            <div class="alert alert-warning">
+                To manage your pets, first login.
+            </div>
+        {% endif %}
+    </div>
 {% endif %}
