@@ -32,7 +32,30 @@ class PetManager extends ComponentBase
         $this->page['user'] = $user = $this->getUser();
         $this->page['alert'] = Settings::get('login_alert');
         if($user) //Checks if the user has any pets associated
-            $this->page['pets'] = $pets = (PetModel::where('owner_id', $user->id)->first() ? PetModel::where('owner_id', $user->id)->get() : 0);
+            $this->page['pets'] = $pets = $this->getPets($user);
+    }
+
+    public function getPets($user) {
+        if(PetModel::where('owner_id', $user->id)->first())
+            return PetModel::where('owner_id', $user->id)->get();
+        else
+            return 0;
+    }
+
+    public function onCreate() {
+
+        if(!$this->getUser())
+            return;
+
+        $mode = post('mode', 'create');
+
+        if($mode == 'save') {
+            //Save new model
+        }
+
+        $this->page['mode'] = $mode;
+        $this->page['user'] = $user = $this->getUser();
+
     }
 
     public function getUser() {

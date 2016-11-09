@@ -1,24 +1,35 @@
 {% if user %}
     <div id="pet-manager">
-        <h2>Manage your pets</h2>
-        <button
-            type="button"
-            class="btn btn-primary btn-sm"
-            data-request="onCreate"
-            data-request-data="id: {{ pet.id }}"
-            data-request-update="'{{ __SELF__ }}::default': '#pet-manager'">+ New Pet</button>
-        {% if pets %}
-            {% partial "@petlist" pet=pet %}
+        {% if mode != 'create' %}
+            <h2>Manage your pets</h2>
+            {% if message %}
+                <div class="alert alert-success">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                </div>
+            {% endif %}
+            <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                data-request="onCreate"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-manager'">+ New Pet</button>
+                {% if pets %}
+                    {% partial "@petlist" pets=pets %}
+                {% else %}
+                    <div class="alert alert-info">
+                        You don't have any pets.
+                    </div>
+                {% endif %}
         {% else %}
-            <div class="alert alert-info">
-                You don't have any pets.
-            </div>
-        {% endif %}
-    {% else %}
-        {% if alert %}
-            <div class="alert alert-warning">
-                To manage your pets, first login.
-            </div>
+            {% if mode == 'create' %}
+                {% partial "@create" %}
+            {% endif %}
         {% endif %}
     </div>
+{% else %}
+    {% if alert %}
+        <div class="alert alert-warning">
+            To manage your pets, first login.
+        </div>
+    {% endif %}
 {% endif %}
