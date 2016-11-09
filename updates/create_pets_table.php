@@ -18,6 +18,7 @@ class CreatePetsTable extends Migration
                 $table->string('species', 10)->nullable();
                 $table->date('birth')->nullable();
                 $table->text('description')->nullable();
+                $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
     }
