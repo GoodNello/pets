@@ -4,11 +4,17 @@
         <input type="hidden" name="mode" value="save" />
         <div class="row">
             <div class="col-md-6"><input name="name" type="text" class="form-control" placeholder="Name"></div>
-            <div class="col-md-6">Birthdate</div>
+            <div class="col-md-6"><input type="date" name="birth"></div>
         </div><br><br>
         <div class="row">
             <div class="col-md-6"><input name="breed" type="text" class="form-control" placeholder="Breed"></div>
-            <div class="col-md-6"><select class="form-control" disabled><option>Species</option></select></div>
+            <div class="col-md-6">
+                <select class="form-control">
+                    {% for species in speciesList %}
+                        <option>{{ species }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div><br><br>
         <p><textarea name="description" class="form-control" rows="3" placeholder="Description"></textarea></p>
     </div>
@@ -18,15 +24,16 @@
                 type="submit"
                 class="btn btn-primary btn-sm"
                 data-request="{{ __SELF__ }}::onCreate"
+                data-request-data="owner_id: {{ user.id }}"
                 data-request-update="'{{ __SELF__ }}::default': '#pet-manager'">
                 Save
             </button>
             <button
                 type="button"
                 class="btn btn-link btn-sm"
-                data-request="{{ __SELF__ }}::onUndo"
+                data-request="{{ __SELF__ }}::onRun"
                 data-request-update="'{{ __SELF__ }}::default': '#pet-manager'">
-                Undo
+                Close
             </button>
         </div>
     </div>

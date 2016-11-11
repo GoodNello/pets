@@ -50,11 +50,16 @@ class PetManager extends ComponentBase
         $mode = post('mode', 'create');
 
         if($mode == 'save') {
-            //Save new model
+            $pet = new PetModel;
+            $pet->fill(post());
+            $pet->save();
+            $this->page['message'] = 'Pet saved successfully!';
         }
+        else
+            $this->page['speciesList'] = $this->listSpecies();
 
         $this->page['mode'] = $mode;
-        $this->page['user'] = $user = $this->getUser();
+        $this->onRun();
 
     }
 
@@ -67,5 +72,8 @@ class PetManager extends ComponentBase
 
     }
 
+    protected function listSpecies() {
+        return json_decode(file_get_contents(__DIR__.'/../data/species.json'));
+    }
 
 }

@@ -22,7 +22,7 @@
                 {% endif %}
         {% else %}
             {% if mode == 'create' %}
-                {% partial "@create" %}
+                {% partial "@create" user=user %}
             {% endif %}
         {% endif %}
     </div>
