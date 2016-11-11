@@ -28,14 +28,6 @@ class Pet extends Model
         'name' => 'required|between:2,255',
     ];
 
-    protected $fillable = [
-        'name',
-        'owner_id',
-        'breed',
-        'species',
-        'description'
-    ];
-
     public static function getFromUser($user) {
 
         return PetModel::where('owner_id', $user->id)->get();
@@ -58,7 +50,7 @@ class Pet extends Model
 
         return $this->listSpecies();
     }
-    
+
     // Shows the species name when displaying the model
     protected function getSpeciesNameAttribute() {
 
