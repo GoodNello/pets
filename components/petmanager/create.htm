@@ -9,9 +9,9 @@
         <div class="row">
             <div class="col-md-6"><input name="breed" type="text" class="form-control" placeholder="Breed"></div>
             <div class="col-md-6">
-                <select class="form-control">
-                    {% for species in speciesList %}
-                        <option>{{ species }}</option>
+                <select class="form-control" name="species">
+                    {% for key, species in speciesList %}
+                        <option value="{{ key }}">{{ species }}</option>
                     {% endfor %}
                 </select>
             </div>
