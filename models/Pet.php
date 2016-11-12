@@ -26,7 +26,6 @@ class Pet extends Model
 
     public $rules = [
         'name' => 'required|between:1,30',
-        'birth' => 'required',
         'species' => 'required'
     ];
 
