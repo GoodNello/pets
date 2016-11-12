@@ -79,6 +79,8 @@ class PetProfile extends ComponentBase
             $pet->delete();
             $this->page['message'] = 'Pet deleted successfully!';
         }
+        else
+            $this->page['speciesList'] = $species = $this->listSpecies();
 
         $this->page['mode'] = $mode;
         $this->page['owner'] = $this->isOwner();
@@ -109,6 +111,10 @@ class PetProfile extends ComponentBase
 
         return Auth::getUser();
 
+    }
+
+    protected function listSpecies() {
+        return json_decode(file_get_contents(__DIR__.'/../data/species.json'));
     }
 
 }
