@@ -14,10 +14,11 @@ class CreatePetsTable extends Migration
                 $table->increments('id');
                 $table->integer('owner_id')->unsigned()->index();
                 $table->text('name')->nullable();
-                $table->char('breed', 10)->nullable();
-                $table->string('species')->nullable();
+                $table->char('breed')->nullable();
+                $table->string('species', 10)->nullable();
                 $table->date('birth')->nullable();
                 $table->text('description')->nullable();
+                $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
     }

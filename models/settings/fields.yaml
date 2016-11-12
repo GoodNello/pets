@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    backend_menu:
+        label: Display Backend Menu
+        type: switch
+        comment: Flick to display the menu in the backend
+        default: 1
+    login_alert:
+        label: Show alert when user is not logged in
+        type: switch
+        comment: Flick to display an alert in the pet manager component
+        default: 1

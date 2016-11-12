@@ -1,1 +1,13 @@
-<!-- Refer to the model properties with 'pet.smth' where 'smth' can be name, birth, description, owner, breed and species. -->
+{% if message %}
+    <div class="alert alert-success">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+{% endif %}
+<div id="pet-page">
+    {% if mode == 'edit' %}
+        {% partial "@edit" pet=pet speciesList=speciesList %}
+    {% else %}
+        {% partial "@profile" pet=pet %}
+    {% endif %}
+</div>

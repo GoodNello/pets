@@ -1,0 +1,53 @@
+{{ form_open() }}
+    <div class="form-group">
+        <input type="hidden" name="mode" value="save" />
+        <div class="row">
+            <div class="col-md-6"><input name="name" type="text" class="form-control" value="{{ pet.name }}" placeholder="Name"></div>
+            <div class="col-md-6">{{ pet.birth }}</div>
+        </div><br><br>
+        <div class="row">
+            <div class="col-md-6"><input name="breed" type="text" class="form-control" value="{{ pet.breed }}" placeholder="Breed"></div>
+            <div class="col-md-6">
+                <select class="form-control" name="species">
+                    {% for key, species in speciesList %}
+                        <option
+                            value="{{ key }}"
+                            {% if pet.species == key %}selected{% endif %}>
+                            {{ species }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div><br><br>
+        <p><textarea name="description" class="form-control" rows="3" placeholder="Description">{{ pet.description }}</textarea></p>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-6">
+            <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                data-request="{{ __SELF__ }}::onUpdate"
+                data-request-data="id: {{ pet.id }}"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-page'">
+                Save
+            </button>
+            <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                data-request="{{ __SELF__ }}::onUpdate"
+                data-request-data="id: {{ pet.id }}, mode: 'delete'"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-page'"
+                data-request-confirm="Are you sure?">
+                Delete
+            </button>
+            <button
+                type="button"
+                class="btn btn-link btn-sm"
+                data-request="{{ __SELF__ }}::onUndo"
+                data-request-data="id: {{ pet.id }}"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-page'">
+                Undo
+            </button>
+        </div>
+    </div>
+{{ form_close() }}
