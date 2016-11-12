@@ -5,5 +5,7 @@ This plugin requires [RainLab.User](https://octobercms.com/plugin/rainlab-user).
 
 ## [Gallery](http://imgur.com/a/GLtU5)
 
+## [Installation](https://github.com/GoodNello/pets/wiki/Installation)
+
 ## Development
-I'm currently working in my free time on this plugin. As of now, you can only create and associate pets to users in the backend.
+I'm currently working in my free time on this plugin.
