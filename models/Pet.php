@@ -25,7 +25,18 @@ class Pet extends Model
     ];
 
     public $rules = [
-        'name' => 'required|between:2,255',
+        'name' => 'required|between:1,30',
+        'birth' => 'required',
+        'species' => 'required'
+    ];
+
+    public $fillable = [
+        'name',
+        'breed',
+        'species',
+        'birth',
+        'description',
+        'owner_id',
     ];
 
     public static function getFromUser($user) {
@@ -54,8 +65,12 @@ class Pet extends Model
     // Shows the species name when displaying the model
     protected function getSpeciesNameAttribute() {
 
-        $species = $this->listSpecies();
-        return $species[$this->species];
+        if($this->species) {
+            $species = $this->listSpecies();
+            return $species[$this->species];
+        }
+        else
+            return 'Unknown';
     }
 
     public function getBirthAttribute($date) {
