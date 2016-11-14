@@ -6,7 +6,7 @@
 {% endif %}
 <div id="pet-page">
     {% if mode == 'edit' %}
-        {% partial "@edit" pet=pet speciesList=speciesList %}
+        {% partial "@edit" pet=pet %}
     {% else %}
         {% partial "@profile" pet=pet %}
     {% endif %}

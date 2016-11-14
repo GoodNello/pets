@@ -1,6 +1,7 @@
 <?php namespace GoodNello\Pets\Components;
 
 use Auth;
+use Carbon\Carbon;
 use Cms\Classes\ComponentBase;
 use GoodNello\Pets\Models\Pet as PetModel;
 use GoodNello\Pets\Models\Settings as Settings;
@@ -31,7 +32,7 @@ class PetManager extends ComponentBase
     public function onRun() {
         $this->page['user'] = $user = $this->getUser();
         $this->page['alert'] = Settings::get('login_alert');
-        if($user) //Checks if the user has any pets associated
+        if($user)
             $this->page['pets'] = $pets = $this->getPets($user);
     }
 
@@ -55,8 +56,10 @@ class PetManager extends ComponentBase
             $pet->save();
             $this->page['message'] = 'Pet saved successfully!';
         }
-        else
+        else {
             $this->page['speciesList'] = $this->listSpecies();
+            $this->page['today'] = Carbon::today()->format('Y-m-d');
+        }
 
         $this->page['mode'] = $mode;
         $this->onRun();
