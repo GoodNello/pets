@@ -5,6 +5,7 @@ use Flash;
 use Input;
 use Request;
 use Redirect;
+use Carbon\Carbon;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use GoodNello\Pets\Models\Pet as PetModel;
@@ -79,8 +80,11 @@ class PetProfile extends ComponentBase
             $pet->delete();
             $this->page['message'] = 'Pet deleted successfully!';
         }
-        else
+        else {
             $this->page['speciesList'] = $species = $this->listSpecies();
+            $this->page['birthdate'] = Carbon::parse($pet->birth)->format('Y-m-d');
+            $this->page['today'] = Carbon::today()->format('Y-m-d');
+        }
 
         $this->page['mode'] = $mode;
         $this->page['owner'] = $this->isOwner();
