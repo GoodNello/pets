@@ -66,6 +66,15 @@ class PetManager extends ComponentBase
 
     }
 
+    public function onDelete() {
+
+        $pet = PetModel::find(post('id'));
+        $pet->delete();
+        $this->page['message'] = 'Pet deleted successfully!';
+        $this->onRun();
+
+    }
+
     public function getUser() {
 
         if (!Auth::check())
