@@ -3,7 +3,7 @@
         <input type="hidden" name="mode" value="save" />
         <div class="row">
             <div class="col-md-6"><input name="name" type="text" class="form-control" value="{{ pet.name }}" placeholder="Name"></div>
-            <div class="col-md-6">{{ pet.birth }}</div>
+            <div class="col-md-6"><input type="date" name="birth" max="{{ today }}" value="{{ birthdate }}"></div>
         </div><br><br>
         <div class="row">
             <div class="col-md-6"><input name="breed" type="text" class="form-control" value="{{ pet.breed }}" placeholder="Breed"></div>

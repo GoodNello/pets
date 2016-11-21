@@ -13,7 +13,18 @@
         <td>{{ pet.speciesname }}</td>
         <td>{{ pet.breed }}</td>
         <td>{{ pet.birth }}</td>
-        <td><a class="btn btn-default btn-xs" href='./pet/{{ pet.id }}' role="button">View</a><br></td>
+        <td>
+            <a class="btn btn-default btn-xs" href='./pet/{{ pet.id }}' role="button">View</a>
+            <button
+                type="button"
+                class="btn btn-danger btn-xs"
+                data-request="{{ __SELF__ }}::onDelete"
+                data-request-data="id: {{ pet.id }}"
+                data-request-update="'{{ __SELF__ }}::default': '#pet-manager'"
+                data-request-confirm="Are you sure?">
+                Delete
+            </button>
+            <br></td>
         </tr>
         {% endfor %}
 </table>
