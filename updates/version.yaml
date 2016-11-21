@@ -4,4 +4,5 @@
 1.0.1:
     - Birthdate has now a max of today
 1.0.2:
-    - ¯\_(ツ)_/¯
+    - Birthdate can now be edited in the frontend
+    - Added delete button in pet manager component
